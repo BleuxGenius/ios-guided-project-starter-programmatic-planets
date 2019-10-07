@@ -12,10 +12,20 @@ class PlanetsCollectionViewController: UICollectionViewController {
     
     // MARK: - Properties
     let planetController = PlanetController()
+    var horizontalPlanets: CGFloat = 2
         
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView?.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//    the layout of how many 
+    let horizontalInsets = collectionView.contentInset.left + collectionView.contentInset.right
+    let itemSpacing = (collectionViewLayout as! UICollectionViewFlowLayout).minimumInteritemSpacing * (horizontalPlanets - 1)
+    
+    let width = (collectionView.frame.width - horizontalInsets - itemSpacing) / horizontalPlanets
+    return CGSize(width: width, height: width * 1.2)
     }
 
     // MARK: - UICollectionViewDataSource
